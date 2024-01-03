@@ -5,9 +5,13 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
-	vim.cmd([[hi NvimTreeNormal guibg=NONE ctermbg=None]])
 		require("nvim-tree").setup({
 			filters = { dotfiles = false },
+			renderer = {
+				indent_markers = {
+					enable = true
+				}
+			}
 		})
 	end,
 }

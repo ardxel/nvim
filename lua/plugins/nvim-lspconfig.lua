@@ -1,7 +1,7 @@
+---@diagnostic disable: missing-fields
 local on_attach = function(client, bufnr)
 	local keymap = vim.keymap
 	local opts = { noremap = true, silent = true, buffer = bufnr }
-
 	-- keymap.set("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
 	keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
 	keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
@@ -11,8 +11,20 @@ local on_attach = function(client, bufnr)
 	keymap.set("n", "<C-m>j", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 end
 
-local config = function()	
+local config = function()
 	require("neoconf").setup({})
+
+	local signs = {
+		Error = " ",
+		Warn = " ",
+		Hint = "",
+		Info = "",
+	}
+
+	for type, icon in pairs(signs) do
+		local hl = "DiagnosticSign" .. type
+		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = nil })
+	end
 
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	local lspconfig = require("lspconfig")
@@ -29,6 +41,7 @@ local config = function()
 	lspconfig.tsserver.setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
+		flags = { debounce_text_changes = 150 },
 		filetypes = {
 			"typescript",
 			"javascript",
@@ -36,21 +49,6 @@ local config = function()
 			"typescriptreact",
 		},
 		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
-	})
-
-	lspconfig.emmet_ls.setup({
-		capabilities = capabilities,
-		on_attach = on_attach,
-		filetypes = {
-			"css",
-			"scss",
-			"sass",
-			"html",
-			"typescript",
-			"javascript",
-			"typescriptreact",
-			"javascriptreact",
-		},
 	})
 
 	lspconfig.lua_ls.setup({

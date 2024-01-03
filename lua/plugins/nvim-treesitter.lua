@@ -1,9 +1,12 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = false,
-	
+
 	config = function()
 		require("nvim-treesitter.configs").setup({
+			context = {
+				enable = false,
+			},
 			indent = { enable = true },
 			autotag = { enable = true },
 			ensure_installed = {
@@ -16,7 +19,7 @@ return {
 				"scss",
 				"tsx",
 				"jsdoc",
-								
+
 				-- lua
 				"lua",
 				"luadoc",
@@ -29,12 +32,16 @@ return {
 				"markdown",
 				"gitignore",
 			},
-			
+
 			auto_install = true,
 			highlight = {
 				enable = true,
-				additional_vim_regex_highlighting = true
-			}
+				additional_vim_regex_highlighting = true,
+			},
+			rainbow = {
+				enable = true,
+				extended_mode = true,
+			},
 		})
-	end
+	end,
 }

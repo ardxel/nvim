@@ -10,10 +10,8 @@ return {
 			input_after_comment = true,
 		})
 
-		vim.keymap.set("n", "<leader>nf", function()
+		vim.keymap.set("n", "<leader>ng", function()
 			neogen.generate()
 		end, opts)
 	end,
-	-- Uncomment next line if you want to follow only stable versions
-	-- version = "*"
 }

@@ -15,17 +15,13 @@ map.set("n", "<C-l>", "<C-w>l", opts)
 map.set("n", "<leader>sh", ":vsplit<CR>", opts) -- split vertical
 map.set("n", "<leader>sv", ":split<CR>", opts) -- split horizontal
 
--- COMMENTS
-vim.api.nvim_set_keymap("n", "<C-_>", "gcc", { noremap = false })
-vim.api.nvim_set_keymap("v", "<C-_>", "gcc", { noremap = false })
-
 -- SELECT ALL
 map.set("n", "<C-S-A>", "ggVG", opts)
 
 -- BUFFERLINE MANAGMENT
 map.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
 map.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
-map.set("n", "<leader>bd", ":bd<CR>")
+-- map.set("n", "<leader>bd", ":bd<CR>")
 
 
 map.set('t', "<Esc>", "<C-\\><C-n>", {noremap = true})
