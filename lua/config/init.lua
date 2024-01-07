@@ -11,7 +11,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("config.options")
 require("config.globals")
 require("config.keymaps")
 require("config.autocmds")
@@ -23,12 +22,13 @@ local options = {
 	rtp = {
 		disabled_plugins = {
 			"gzip",
-		"matchit",
-		"netrwPlugin",
-		"tarPlugin",
-		"tohtml",
+			"matchit",
+			"netrwPlugin",
+			"tarPlugin",
+			"tohtml",
 		},
 	},
 }
 
 require("lazy").setup(plugins, options)
+require("config.options")

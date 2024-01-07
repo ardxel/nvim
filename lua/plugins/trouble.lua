@@ -7,7 +7,14 @@ return {
 		{ "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
 		{ "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
 		{ "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
-	},
+	  { "<leader>[d", function ()
+	   require("trouble").next({skip_groups = true, jump = true})
+	  end},
+    {"<leader>]d", function ()
+      require("trouble").previous({skip_groups = true, jump = true})
+    end}
+  
+  },
 	config = function()
 		require("trouble").setup()
 	end,

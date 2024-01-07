@@ -10,8 +10,12 @@ return {
 			input_after_comment = true,
 		})
 
-		vim.keymap.set("n", "<leader>ng", function()
+		vim.keymap.set("n", "<leader>ngd", function()
 			neogen.generate()
 		end, opts)
+
+    vim.keymap.set("n", "<leader>ngf", function ()
+      neogen.generate({type = "func"})
+    end)
 	end,
 }

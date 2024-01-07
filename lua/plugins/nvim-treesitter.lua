@@ -37,6 +37,9 @@ return {
 			highlight = {
 				enable = true,
 				additional_vim_regex_highlighting = true,
+        custom_captures = {
+          ["keyword"] = "Bold"
+        }
 			},
 			rainbow = {
 				enable = true,

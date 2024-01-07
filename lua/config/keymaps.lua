@@ -16,14 +16,12 @@ map.set("n", "<leader>sh", ":vsplit<CR>", opts) -- split vertical
 map.set("n", "<leader>sv", ":split<CR>", opts) -- split horizontal
 
 -- SELECT ALL
-map.set("n", "<C-S-A>", "ggVG", opts)
+map.set("n", "<C-S-A>", "gg<S-v>G")
 
 -- BUFFERLINE MANAGMENT
 map.set("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>")
 map.set("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>")
--- map.set("n", "<leader>bd", ":bd<CR>")
 
-
-map.set('t', "<Esc>", "<C-\\><C-n>", {noremap = true})
-map.set('x', "y", "\"+y")
-map.set('n', "y", "\"+y")
+map.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+map.set("x", "y", '"+y')
+map.set("n", "y", '"+y')

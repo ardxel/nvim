@@ -1,41 +1,12 @@
-local kind_icons = {
-	Text = "󰉿",
-	Method = "󰆧",
-	Function = "󰊕",
-	Constructor = "",
-	Field = "󰜢",
-	Variable = "󰀫",
-	Class = "󰠱",
-	Interface = "",
-	Module = "",
-	Property = "󰜢",
-	Unit = "󰑭",
-	Value = "󰎠",
-	Enum = "",
-	Keyword = "󰌋",
-	Snippet = "",
-	Color = "󰏘",
-	File = "󰈙",
-	Reference = "󰈇",
-	Folder = "󰉋",
-	EnumMember = "",
-	Constant = "󰏿",
-	Struct = "󰙅",
-	Event = "",
-	Operator = "󰆕",
-	TypeParameter = "",
-}
-
 return {
 	"hrsh7th/nvim-cmp",
 	config = function()
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
-		local lspkind = require("lspkind")
 
 		cmp.setup({
 			completion = {
-				completeopt = "menu,menuone,noinsert"
+				completeopt = "menu,menuone,noinsert",
 			},
 			snippet = {
 				expand = function(args)
@@ -53,51 +24,47 @@ return {
 				documentation = cmp.config.window.bordered(),
 			},
 			mapping = cmp.mapping.preset.insert({
-				["<C-k>"] = cmp.mapping.select_prev_item(),
-				["<C-j>"] = cmp.mapping.select_next_item(),
-				["<Esc>"] = cmp.mapping.confirm({ select = false }),
+				["<C-j>"] = cmp.mapping.scroll_docs(-4),
+				["<C-k>"] = cmp.mapping.scroll_docs(4),
 				["<Enter>"] = cmp.mapping.confirm({
 					select = true,
 					behavior = cmp.ConfirmBehavior.Replace,
 				}),
-				["qq"] = cmp.mapping.close(),
+				["<Esc>"] = cmp.mapping.close(),
 				["<C-l>"] = cmp.mapping.complete(),
 			}),
 			sources = cmp.config.sources({
+        { name = "luasnip", priority = 1100 },
 				{ name = "nvim_lsp", priority = 1000 },
 				{ name = "buffer", priority = 500 },
 				{ name = "path", priority = 250 },
-				{ name = "emoji", priority = 800 },
-				{ name = "luasnip" },
 			}),
 			formatting = {
 				fields = { "abbr", "menu", "kind" },
 				format = function(entity, item)
 					item.menu = ({
-						nvim_lsp = "[LSP]  ",
-						luasnip = "[Snip]  ",
-						buffer = "[Buff]  ",
-						path = "[Path]  ",
+						nvim_lsp = "[LSP] ",
+						luasnip = "[Snip] ",
+						buffer = "[Buff] ",
+						path = "[Path] ",
 					})[entity.source.name]
 
+					local kind_icons = require("config.icons.kinds")
+
 					if kind_icons[item.kind] then
-						item.kind = kind_icons[item.kind] .. item.kind 
+						item.kind = kind_icons[item.kind] .. item.kind
 					end
-					
+
 					return item
 				end,
 			},
 		})
 	end,
 	dependencies = {
-		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-		"onsails/lspkind.nvim",
-		{
-			"L3MON4D3/LuaSnip",
-			build = "make install_jsregexp",
-		},
+		"L3MON4D3/LuaSnip",
+		"roobert/tailwindcss-colorizer-cmp.nvim",
 	},
 }
